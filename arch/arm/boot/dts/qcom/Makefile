@@ -335,6 +335,10 @@ dtb-$(CONFIG_ARCH_MSM8909) += msm8909-pm8916-mtp.dtb \
 	apq8009-ext-codec-dragon.dtb \
 	apq8009-dragon.dtb
 
+ifeq ($(CONFIG_MACH_PANDA),y)
+dtb-$(CONFIG_ARCH_MSM8916) += msm8976-v1.1-qrd-skun-panda01a.dtb
+endif
+
 ifeq ($(CONFIG_ARM64),y)
 always          := $(dtb-y)
 subdir-y        := $(dts-dirs)

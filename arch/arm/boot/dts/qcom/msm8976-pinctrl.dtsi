@@ -49,6 +49,42 @@
 			};
 		};
 
+		cdc-ext-spk-pa {
+			qcom,pins = <&gp 132>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+			label = "cdc-ext-spk-pa";
+			cdc_ext_spk_pa_act: ext_spk_pa_on {
+				drive-strength = <8>;
+				output-low;
+				bias-pull-none;
+			};
+			cdc_ext_spk_pa_sus: ext_spk_pa_off {
+				drive-strength = <2>;
+				output-low;
+				bias-disable;
+			};
+		};
+
+		cdc-ext-hp-switch {
+			qcom,pins = <&gp 142>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+			label = "cdc-ext-hp-switch";
+
+			ext_p_switch_on {
+				drive-strength = <8>;
+				output-low;
+				bias-pull-none;
+			};
+
+			ext_hp_switch_off {
+				drive-strength = <2>;
+				output-low;
+				bias-disable;
+			};
+		};
+
 		cdc-pdm-lines {
 			cdc_pdm_lines_act: pdm_lines_on {
 				mux {
@@ -720,6 +756,36 @@
 				};
 			};
 		};
+
+                i2c_7 {
+                        i2c_7_active: i2c_7_active {
+                                /* active state */
+                                mux {
+                                        pins = "gpio110", "gpio111";
+                                        function = "blsp_i2c7";
+                                };
+
+                                config {
+                                        pins = "gpio110", "gpio111";
+                                        drive-strength = <2>;
+                                        bias-pull-up;
+                                };
+                        };
+
+                        i2c_7_sleep: i2c_7_sleep {
+                                /* suspended state */
+                                mux {
+                                        pins = "gpio110", "gpio111";
+                                        function = "gpio";
+                                };
+
+                                config {
+                                        pins = "gpio110", "gpio111";
+                                        drive-strength = <2>;
+                                        bias-pull-up;
+                                };
+                        };
+                };
 
 		i2c_8 {
 			i2c_8_active: i2c_8_active {
@@ -2160,6 +2226,51 @@
 					drive-strength = <6>;
 					bias-disable;
 				};
+			};
+		};
+
+		panda_no_used_pin {
+			qcom,pins = <&gp 20>,<&gp 36>,<&gp 66>,<&gp 107>,<&gp 130>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <5>;
+			label = "panda_no_used_pin";
+			panda_no_used_pins_default: panda_no_used_pin_default {
+				drive-strength = <2>;
+				output-low;
+				bias-disable;
+			};
+		};
+
+		cam_sensor_flash_default {
+			qcom,pins = <&gp 122>,<&gp 123>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <0>;
+			label = "cam_sensor_flash_default";
+			cam_sensor_flash_default: cam_sensor_flash_default {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		cam_sensor_flash_sleep {
+			qcom,pins = <&gp 122>,<&gp 123>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <0>;
+			label = "cam_sensor_flash_sleep";
+			cam_sensor_flash_sleep: cam_sensor_flash_sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		hall_int_pin {
+			qcom,pins = <&gp 112>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <1>;
+			label = "hall-irq";
+			hall_sensor_int_default: hall_sensor_int_default {
+				drive-strength = <2>;
+				bias-pull-up;
 			};
 		};
 	};
