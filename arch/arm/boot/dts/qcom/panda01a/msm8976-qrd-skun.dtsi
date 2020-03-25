@@ -261,50 +261,75 @@
 	linux,reserve-region;
 };
 
-&tlmm_pinmux {
-	cam_sensor_front_default {
-		cam_sensor_front_default {
+&msm_gpio {
+	cam_sensor_front_default: cam_sensor_front_default {
+		config {
 			output-low;
 		};
 	};
 
-	cam_sensor_front_sleep {
-		cam_sensor_front_sleep {
+	cam_sensor_front_sleep: cam_sensor_front_sleep {
+		config {
 			output-low;
 		};
 	};
 
 	pmx_ts_int_suspend {
-		ts_int_suspend {
+		ts_int_suspend: ts_int_suspend {
 			/delete-property/ bias-pull-down;
-			bias-disable;
+			config {
+				bias-disable;
+			};
 		};
 	};
 
 	pmx_ts_reset_suspend {
-		ts_reset_suspend {
+		ts_reset_suspend: ts_reset_suspend {
 			/delete-property/ bias-pull-down;
-			bias-disable;
+			config {
+				bias-disable;
+			};
 		};
 	};
 
 	pmx_ts_release {
-		ts_release {
+		ts_release: ts_release {
 			/delete-property/ bias-pull-down;
-			bias-disable;
+			config {
+				bias-disable;
+			};
 		};
 	};
 
-	pmx_mdss {
-		suspend {
+	pmx_mdss_te {
+		mdss_te_suspend {
 			/delete-property/ bias-pull-down;
 		};
 	};
 
 
 	tlmm_gpio_key {
-		qcom,pins = <&gp 113>;
-		qcom,num-grp-pins = <1>;
+		gpio_key_active: gpio_key_active {
+			mux {
+				pins = "gpio113";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio113";
+				function = "gpio";
+			};
+		};
+
+		gpio_key_suspend: gpio_key_suspend {
+			mux {
+				pins = "gpio113";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio113";
+				function = "gpio";
+			};
+		};
 	};
 };
 
@@ -355,7 +380,7 @@
 	bias-disable;
 };
 
-&pmi8950_haptic {
+&pmi_haptic {
 	qcom,vmax-mv = <3300>;
 };
 
@@ -380,14 +405,44 @@
 	qcom,mdss-dsi-pan-fps-update = "dfps_immediate_porch_mode_hfp";
 };
 
-&pmx_mdss {
-	qcom,num-grp-pins = <1>;
-	qcom,pins = <&gp 25>;
+&mdss_dsi_active {
+	mux {
+		pins = "gpio25";
+		function = "gpio";
+	};
+	config {
+		pins = "gpio25";
+		/delete-property/ output-high;
+	};
 };
 
-&pmx_mdss_te {
-	qcom,num-grp-pins = <1>;
-	qcom,pins = <&gp 24>;
+&mdss_dsi_suspend {
+	mux {
+		pins = "gpio25";
+		function = "gpio";
+	};
+	config {
+		pins = "gpio25";
+		/delete-property/ output-low;
+	};
+};
+
+&mdss_te_active {
+	mux {
+		pins = "gpio24";
+	};
+	config {
+		pins = "gpio24";
+	};
+};
+
+&mdss_te_suspend {
+	mux {
+		pins = "gpio24";
+	};
+	config {
+		pins = "gpio24";
+	};
 };
 
 &mdss_dsi0 {

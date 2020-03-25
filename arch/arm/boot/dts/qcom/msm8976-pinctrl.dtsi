@@ -50,38 +50,58 @@
 		};
 
 		cdc-ext-spk-pa {
-			qcom,pins = <&gp 132>;
-			qcom,num-grp-pins = <1>;
-			qcom,pin-func = <0>;
-			label = "cdc-ext-spk-pa";
 			cdc_ext_spk_pa_act: ext_spk_pa_on {
-				drive-strength = <8>;
-				output-low;
-				bias-pull-none;
+				mux {
+					qcom,pins = "gpio132";
+					function = "gpio";
+				};
+				config {
+					qcom,pins = "gpio132";
+					drive-strength = <8>;
+					output-low;
+					bias-pull-none;
+				};
 			};
+
 			cdc_ext_spk_pa_sus: ext_spk_pa_off {
-				drive-strength = <2>;
-				output-low;
-				bias-disable;
+				mux {
+					qcom,pins = "gpio132";
+					function = "gpio";
+				};
+				config {
+					qcom,pins = "gpio132";
+					drive-strength = <2>;
+					output-low;
+					bias-disable;
+				};
 			};
 		};
 
 		cdc-ext-hp-switch {
-			qcom,pins = <&gp 142>;
-			qcom,num-grp-pins = <1>;
-			qcom,pin-func = <0>;
-			label = "cdc-ext-hp-switch";
-
-			ext_p_switch_on {
-				drive-strength = <8>;
-				output-low;
-				bias-pull-none;
+			ext_p_switch_on: ext_p_switch_on {
+				mux {
+					pins = "gpio142";
+					function = "gpio";
+				};
+				config {
+					pins = "gpio142";
+					drive-strength = <8>;
+					output-low;
+					bias-pull-none;
+				};
 			};
 
-			ext_hp_switch_off {
-				drive-strength = <2>;
-				output-low;
-				bias-disable;
+			ext_hp_switch_off: ext_hp_switch_off {
+				mux {
+					pins = "gpio142";
+					function = "gpio";
+				};
+				config {
+					pins = "gpio142";
+					drive-strength = <2>;
+					output-low;
+					bias-disable;
+				};
 			};
 		};
 
@@ -859,6 +879,19 @@
 				pins = "gpio129", "gpio35";
 				bias-disable; /* No PULL */
 				drive-strength = <2>; /* 2 MA */
+			};
+		};
+
+		cam_sensor_rear_sleep: cam_sensor_rear_sleep {
+			/* RESET, STANDBY */
+			mux {
+				pins = "gpio129","gpio35";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio129","gpio35";
+				drive-strength = <2>; /* 2 MA */
+				bias-disable; /* No PULL */
 			};
 		};
 
@@ -2004,7 +2037,7 @@
 
 		/* WSA VI sense */
 		wsa-vi {
-			wsa_vi_on: wsa_vi_on {
+			wsa_vi_act: wsa_vi_on {
 				mux {
 					pins = "gpio108", "gpio109";
 					function = "wsa_io";
@@ -2230,45 +2263,52 @@
 		};
 
 		panda_no_used_pin {
-			qcom,pins = <&gp 20>,<&gp 36>,<&gp 66>,<&gp 107>,<&gp 130>;
-			qcom,pin-func = <0>;
-			qcom,num-grp-pins = <5>;
-			label = "panda_no_used_pin";
 			panda_no_used_pins_default: panda_no_used_pin_default {
-				drive-strength = <2>;
-				output-low;
-				bias-disable;
+				mux {
+					pins = "gpio20","gpio36","gpio66","gpio107","gpio130";
+					function = "gpio";
+				};
+				config {
+					pins = "gpio20","gpio36","gpio66","gpio107","gpio130";
+					drive-strength = <2>;
+					output-low;
+					bias-disable;
+				};
 			};
+	
 		};
 
-		cam_sensor_flash_default {
-			qcom,pins = <&gp 122>,<&gp 123>;
-			qcom,num-grp-pins = <2>;
-			qcom,pin-func = <0>;
-			label = "cam_sensor_flash_default";
-			cam_sensor_flash_default: cam_sensor_flash_default {
-				drive-strength = <2>;
-				bias-disable;
+		cam_sensor_flash_default: cam_sensor_flash_default {
+			mux {
+				pins = "gpio122","gpio123";
+				function = "gpio";
 			};
-		};
-
-		cam_sensor_flash_sleep {
-			qcom,pins = <&gp 122>,<&gp 123>;
-			qcom,num-grp-pins = <2>;
-			qcom,pin-func = <0>;
-			label = "cam_sensor_flash_sleep";
-			cam_sensor_flash_sleep: cam_sensor_flash_sleep {
+			config {
+				pins = "gpio122","gpio123";
 				drive-strength = <2>;
 				bias-disable;
 			};
 		};
 
-		hall_int_pin {
-			qcom,pins = <&gp 112>;
-			qcom,pin-func = <0>;
-			qcom,num-grp-pins = <1>;
-			label = "hall-irq";
-			hall_sensor_int_default: hall_sensor_int_default {
+		cam_sensor_flash_sleep: cam_sensor_flash_sleep {
+			mux {
+				pins = "gpio122","gpio123";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio122","gpio123";
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		hall_sensor_int_default: hall_sensor_int_default {
+			mux {
+				pins = "gpio112";
+				function = "gpio";
+			};
+			config {
+				pins = "gpio112";
 				drive-strength = <2>;
 				bias-pull-up;
 			};
