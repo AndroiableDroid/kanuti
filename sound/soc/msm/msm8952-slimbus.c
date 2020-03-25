@@ -3575,7 +3575,7 @@ int msm_audrx_init(struct snd_soc_pcm_runtime *rtd)
 	if (!strcmp(dev_name(codec_dai->dev), "tomtom_codec")) {
 
 		wcd9xxx_mbhc_cfg.gpio_level_insert = of_property_read_bool(
-						codec->card->dev->of_node,
+						codec->component.card->dev->of_node,
 						"qcom,headset-jack-type-NC");
 		/* start mbhc */
 		wcd9xxx_mbhc_cfg.calibration = def_codec_mbhc_cal();
